@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LearnWebView</string>
+
+    <string name="download_sdcard_busy_dlg_msg">存储设备正忙，为确保正常下载此文件，请关闭USB大容量存储。</string>
+    <string name="download_sdcard_busy_dlg_title">USB 存储不可用</string>
+    <string name="download_no_sdcard_dlg_msg">为正常下载此文件需要 USB 存储设备。</string>
+    <string name="download_no_sdcard_dlg_title">未找到存储卡</string>
+    <string name="action_ok">确认</string>
+</resources>
