@@ -5,5 +5,31 @@
     <string name="download_sdcard_busy_dlg_title">USB 存储不可用</string>
     <string name="download_no_sdcard_dlg_msg">为正常下载此文件需要 USB 存储设备。</string>
     <string name="download_no_sdcard_dlg_title">未找到存储卡</string>
-    <string name="action_ok">确认</string>
+    <string name="action_ok">确定</string>
+    <string name="action_cancel">取消</string>
+
+    <string name="tasks_manager_demo_title">任务管理器案例</string>
+    <string name="tasks_manager_demo_name" formatted="false">任务: %d</string>
+    <string name="tasks_manager_demo_status_loading">状态: 加载中...</string>
+    <string name="tasks_manager_demo_status_pending">状态: 队列中</string>
+    <string name="tasks_manager_demo_status_started">状态: 开始下载</string>
+    <string name="tasks_manager_demo_status_connected">状态: 已连接上</string>
+    <string name="tasks_manager_demo_status_progress">状态: 下载中...</string>
+    <string name="tasks_manager_demo_status_downloading" formatted="false">状态: 正在下载 %d</string>
+    <string name="tasks_manager_demo_status_error">状态: 出错</string>
+    <string name="tasks_manager_demo_status_paused">状态: 暂停</string>
+    <string name="tasks_manager_demo_status_completed">状态: 下载完成</string>
+    <string name="tasks_manager_demo_status_not_downloaded">状态: 未下载</string>
+
+    <string name="start">开始</string>
+    <string name="pause">暂停</string>
+    <string name="open">打开</string>
+
+    <string name="dialog_task_exist_prompt_title">确认提示</string>
+    <string name="dialog_task_exist_prompt_message">此任务已存在，重新下载会覆盖旧有文件，确认下载吗？</string>
+
+    <string name="dialog_file_no_exist_prompt_message">文件已删除，是否重新下载？</string>
+
+    <string name="search_hint">搜索或输入网址</string>
+    <string name="action_new_tab">主页</string>
 </resources>

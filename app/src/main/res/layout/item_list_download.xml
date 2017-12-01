@@ -69,9 +69,6 @@
 
     <Button
         android:id="@+id/btn_action"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="53dp"
-        android:layout_height="22dp"
-        android:gravity="center"
-        android:textSize="10sp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

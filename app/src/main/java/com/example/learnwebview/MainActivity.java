@@ -1,6 +1,9 @@
 package com.example.learnwebview;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,21 +14,42 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
+import com.example.learnwebview.activities.DownloadManagerActivity;
+import com.example.learnwebview.bean.FileItem;
+import com.example.learnwebview.bus.BrowserEvents;
+import com.example.learnwebview.download.DownloadManager;
 import com.example.learnwebview.interfaces.UIController;
+import com.example.learnwebview.utils.UIUtils;
 import com.example.learnwebview.web.MyDownloadListener;
 import com.example.learnwebview.web.MyWebChromeClient;
 
-public class MainActivity extends AppCompatActivity implements UIController{
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.example.learnwebview.bus.BrowserEvents.DownloadMessage.MSG_TASK_EXIST;
+
+public class MainActivity extends AppCompatActivity implements UIController {
 
 	private Activity mContext;
 	private static final String url = "http://www.baidu.com";
 	private ProgressBar mProgressBar;
 	private WebView mWebView;
 
+	@OnClick(R.id.btn_download_manager)
+	void goDownloadManager() {
+		Intent intent = new Intent(this, DownloadManagerActivity.class);
+		startActivity(intent);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ButterKnife.bind(this);
 		mContext = this;
 		mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 		FrameLayout fl_container = (FrameLayout) findViewById(R.id.fl_container);
@@ -70,4 +94,35 @@ public class MainActivity extends AppCompatActivity implements UIController{
 		mProgressBar.setProgress(newProgress);
 	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		EventBus.getDefault().register(this);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		EventBus.getDefault().unregister(this);
+	}
+
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	public void showTaskExistDialog(BrowserEvents.DownloadMessage event) {
+		final FileItem item = event.item;
+		if (event.msg == MSG_TASK_EXIST) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+			builder.setTitle(R.string.dialog_task_exist_prompt_title);
+			builder.setMessage(item.getName() + " "
+					+ UIUtils.getString(R.string.dialog_task_exist_prompt_message));
+			builder.setPositiveButton(R.string.action_ok,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							DownloadManager.getImpl().startDownload(item, true);
+						}
+					});
+			builder.setNegativeButton(R.string.action_cancel, null);
+			builder.show();
+		}
+	}
 }
