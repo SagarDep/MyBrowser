@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 public class BaseApplication extends Application {
 
 	private static Context mContext;
+	private static Application mApp;
 	private static final Executor mIOThread = Executors.newSingleThreadExecutor();
 	private static final Executor mTaskThread = Executors.newCachedThreadPool();
 
@@ -25,6 +26,7 @@ public class BaseApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		mContext = this;
+		mApp = this;
 
 		initFileDownloader();
 	}
@@ -42,6 +44,10 @@ public class BaseApplication extends Application {
 
 	public static Context getContext() {
 		return mContext;
+	}
+
+	public static Application getApplication() {
+		return mApp;
 	}
 
 	@NonNull

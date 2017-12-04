@@ -18,7 +18,6 @@ import com.example.learnwebview.activities.DownloadManagerActivity;
 import com.example.learnwebview.bean.FileItem;
 import com.example.learnwebview.bus.BrowserEvents;
 import com.example.learnwebview.download.DownloadManager;
-import com.example.learnwebview.interfaces.UIController;
 import com.example.learnwebview.utils.UIUtils;
 import com.example.learnwebview.web.MyDownloadListener;
 import com.example.learnwebview.web.MyWebChromeClient;
@@ -32,7 +31,7 @@ import butterknife.OnClick;
 
 import static com.example.learnwebview.bus.BrowserEvents.DownloadMessage.MSG_TASK_EXIST;
 
-public class MainActivity extends AppCompatActivity implements UIController {
+public class MainActivity extends AppCompatActivity  {
 
 	private Activity mContext;
 	private static final String url = "http://www.baidu.com";
@@ -88,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements UIController {
 		webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
 	}
 
-	@Override
 	public void updateProgress(int newProgress) {
 		mProgressBar.setVisibility(newProgress == 100 ? View.GONE : View.VISIBLE);
 		mProgressBar.setProgress(newProgress);

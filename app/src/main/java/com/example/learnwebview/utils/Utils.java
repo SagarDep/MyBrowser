@@ -1,8 +1,11 @@
 package com.example.learnwebview.utils;
 
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import java.io.Closeable;
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 /**
@@ -46,5 +49,15 @@ public class Utils {
 			}
 		}
 		return false;
+	}
+
+	public static void close(@Nullable Closeable closeable) {
+		if (closeable == null)
+			return;
+		try {
+			closeable.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
